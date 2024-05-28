@@ -1,12 +1,15 @@
 import Greet from "@components/Greet"
 import Button from "@components/Button"
+import useStore from '@stores/store'
 
 const App = () => {
+  const {count, decrement, increment} = useStore()
   return (
     <div>
-      <p>Hehe</p>
+      <p>{count}</p>
       <Greet />
-      <Button>kiwkiw</Button>
+      <Button onClick={decrement}>dec</Button>
+      <Button onClick={increment}>inc</Button>
     </div>
   )
 }
