@@ -3,11 +3,12 @@ import { nanoid } from "nanoid";
 import { useListStore } from "@stores/store";
 import Input from "@components/Input";
 import Button from "@components/Button";
+import List from "@components/List";
 
 const App = () => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState(0);
-  const { list, addItem, removeItem } = useListStore();
+  const { list, addItem } = useListStore();
 
   const handleClick = () => {
     console.log(title, amount);
@@ -36,13 +37,7 @@ const App = () => {
         />
         <Button onClick={handleClick}>add</Button>
       </div>
-      <ul>
-        {list.map((item) => (
-          <li key={item.id}>
-            {item.title} <button onClick={() => removeItem(item.id)}>x</button>
-          </li>
-        ))}
-      </ul>
+      <List items={list} />
     </div>
   );
 };
