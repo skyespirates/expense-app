@@ -35,7 +35,9 @@ const App = () => {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
-        <Button onClick={handleClick}>add</Button>
+        <Button onClick={handleClick} size="lg">
+          add
+        </Button>
       </div>
       <List items={list} />
     </div>
