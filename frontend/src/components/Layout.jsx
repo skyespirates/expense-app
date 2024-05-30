@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
-
+import Stack from "@components/Stack";
 const Layout = () => {
   return (
     <div>
-      <h1>Expense App</h1>
+      <Stack variant="h">
+        <h1 className="header">Expense App</h1>
+      </Stack>
       <main>
         <Outlet />
       </main>

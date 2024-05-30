@@ -11,7 +11,7 @@ const List = ({ items = [] }) => {
       {items.map((item) => (
         <ListItem key={item.id}>
           {item.title} - {item.amount}{" "}
-          <Button onClick={removeItem} size="sm">
+          <Button onClick={() => removeItem(item.id)} size="sm">
             {" "}
             <BiSolidTrashAlt size="1.3em" />
           </Button>

@@ -4,6 +4,8 @@ import { useListStore } from "@stores/store";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import List from "@components/List";
+import Center from "@components/Center";
+import Stack from "@components/Stack";
 
 const App = () => {
   const [title, setTitle] = useState("");
@@ -18,28 +20,32 @@ const App = () => {
       amount: parseInt(amount),
     };
     addItem(expense);
+    setTitle("");
+    setAmount(0);
   };
 
   return (
     <div>
-      <div>
-        <Input
-          type="text"
-          placeholder="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <Input
-          type="number"
-          placeholder="amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <Button onClick={handleClick} size="lg">
-          add
-        </Button>
-      </div>
-      <List items={list} />
+      <Center>
+        <Stack gap="8px">
+          <Input
+            type="text"
+            placeholder="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <Input
+            type="number"
+            placeholder="amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+          <Button onClick={handleClick} size="lg">
+            add
+          </Button>
+        </Stack>
+        <List items={list} />
+      </Center>
     </div>
   );
 };
