@@ -6,11 +6,21 @@ import Button from "@components/Button";
 import List from "@components/List";
 import Center from "@components/Center";
 import Stack from "@components/Stack";
+import Modal from "@components/Modals";
 
 const App = () => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState(0);
   const { list, addItem } = useListStore();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const handleClick = () => {
     console.log(title, amount);
@@ -26,6 +36,7 @@ const App = () => {
 
   return (
     <div>
+      <Modal isOpen={isOpen} onClose={closeModal} />
       <Center>
         <Stack gap="8px">
           <Input
@@ -44,7 +55,7 @@ const App = () => {
             add
           </Button>
         </Stack>
-        <List items={list} />
+        <List items={list} openModal={openModal} />
       </Center>
     </div>
   );

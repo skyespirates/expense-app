@@ -15,3 +15,7 @@ body {
 .header {
   margin: 36px 0;
 }
+
+.text-center {
+  text-align: center;
+}
