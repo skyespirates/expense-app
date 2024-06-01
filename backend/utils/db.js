@@ -1,14 +1,14 @@
-// db.js
-require('dotenv').config()
+require('dotenv').config();
 const mysql = require('mysql2/promise');
 
-// Create the connection pool
 const pool = mysql.createPool({
-    connectionLimit: 10, // Adjust the limit based on your application's needs
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER, // Your MySQL username
-    password: process.env.DB_PWD, // Your MySQL password
-    database: process.env.DB_NAME // Your MySQL database name
+  connectionLimit: 10,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PWD,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
-// Export the pool
 module.exports = pool;

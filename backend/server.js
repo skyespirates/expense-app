@@ -2,8 +2,11 @@
 
 require("dotenv").config();
 const Hapi = require("@hapi/hapi");
+const plugins = require('./plugins')
 const pool = require("./utils/db");
+
 const studentRoutes = require('./routes/StudentRoute')
+const expenseRoutes = require('./routes/ExpenseRoute')
 
 const init = async () => {
   const server = Hapi.server({
@@ -11,32 +14,20 @@ const init = async () => {
     host: "localhost",
   });
 
+  await server.register(plugins)
+
   pool.getConnection((err, connection) => {
     if (err) throw err;
-    console.log("Connected to database successfully");
+    server.logger.info("Connected to database successfully");
     connection.release();
   });
 
+  // routes
   server.route(studentRoutes)
-
-//   server.route({
-//     method: "GET",
-//     path: "/",
-//     handler: async (request, h) => {
-//       try {
-//         const sql = "SELECT * FROM student WHERE id = ?";
-//         const values = [1];
-//         const [rows, _] = await pool.execute(sql, values);
-//         return h.response(rows);
-//       } catch (error) {
-//         console.error("An error occurred:", error);
-//         return h.response("Internal Server Error").code(500);
-//       }
-//     },
-//   });
+  server.route(expenseRoutes)
 
   await server.start();
-  console.log("Server running on %s", server.info.uri);
+  server.logger.info(`server running on port ${server.info.uri}`)
 };
 
 process.on("unhandledRejection", (err) => {

@@ -5,7 +5,18 @@ module.exports = [
     {
         method: 'GET',
         path: '/students',
-        handler: StudentController.getStudentList
+        handler: StudentController.getStudentList,
+        config: {
+            validate: {
+                failAction: (request, h, err) => {
+                    throw err;
+                },
+                query: Joi.object().keys({
+                    name: Joi.string().optional().allow('', null),
+                    age: Joi.number().optional().allow(null),
+                })
+            }
+        }
     },
     {
         method: 'GET',

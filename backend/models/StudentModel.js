@@ -1,8 +1,19 @@
 const conn = require('../utils/db')
 
-const getStudentList = () => {
-    const sql = 'SELECT id, name, age FROM student'
+const getStudentList = ({name, age}) => {
+    let sql = 'SELECT id, name, age FROM student '
     const values = []
+    if(name) {
+        sql += 'WHERE name like ? '
+        values.push(`%${name}%`)
+    }
+    if(age) {
+        const studentAge = parseInt(age)
+        values.push(studentAge)
+        const index = values.findIndex(studentAge)
+        sql += index === 0 ? 'WHERE age = ?' : 'AND age = ?'
+    }
+
     return conn.execute(sql, values)
 }
 

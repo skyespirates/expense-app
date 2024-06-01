@@ -1,12 +1,13 @@
 const StudentModel = require('../models/StudentModel')
 
 const getStudentList = async (request, reply) => {
+    const {name, age} = request.query;
     try {
-        const [rows, _] = await StudentModel.getStudentList()
+        const [rows, _] = await StudentModel.getStudentList({name, age})
         return reply.response(rows)
     } catch (error) {
         console.error("An error occurred:", error);
-        return h.response("Internal Server Error").code(500);
+        return reply.response("Internal Server Error").code(500);
     }
 }
 
@@ -17,7 +18,7 @@ const getStudentById = async (request, reply) => {
         return reply.response(rows)
     } catch (error) {
         console.error("An error occurred:", error);
-        return h.response("Internal Server Error").code(500);
+        return reply.response("Internal Server Error").code(500);
     }
 }
 
@@ -28,7 +29,7 @@ const addStudent = async (request, reply) => {
         return reply.response(rows)
     } catch (error) {
         console.error("An error occurred:", error);
-        return h.response("Internal Server Error").code(500)
+        return reply.response("Internal Server Error").code(500)
     }
 }
 
@@ -40,7 +41,7 @@ const updateStudent = async (request, reply) => {
         return reply.response(rows)
     } catch (error) {
         console.error("An error occurred:", error);
-        return h.response("Internal Server Error").code(500);
+        return reply.response("Internal Server Error").code(500);
     }
 }
 
@@ -51,7 +52,7 @@ const deleteStudent = async (request, reply) => {
         return reply.response(rows)
     } catch (error) {
         console.error("An error occurred:", error);
-        return h.response("Internal Server Error").code(500);
+        return reply.response("Internal Server Error").code(500);
     }
 }
 
